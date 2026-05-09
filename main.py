@@ -1,6 +1,9 @@
 import telebot
 from config import TOKEN
 import os
+from aiogram.types import ContentType
+from pathlib import types
+
 #from extract_text import extract_text_from_docx, extract_text_from_pdf 
 
 
@@ -16,6 +19,60 @@ def send_welcome(message):
         "Бот проанализирует и вернёт краткий отчёт."
     )
     bot.reply_to(message, text)
+
+# Обработчик прикреплённых документов
+@bot.message_handler(content_types=ContentType.DOCUMENT)
+def handle_document(message: types.Message):
+    doc = message.document
+    # Получаем информацию о файле и скачиваем его
+    #file_info = await bot.get_file(doc.file_id)
+    #file_bytes = await bot.download_file(file_info.file_path)
+    #data = await file_bytes.read()
+    #fname = doc.file_name.lower()
+    #try:
+        # В зависимости от расширения вызываем соответствующую функцию
+        #if fname.endswith(".pdf"):
+            #text = extract_text_from_pdf(data)
+        #elif fname.endswith(".docx"):
+            #text = extract_text_from_docx(data)
+        #elif fname.endswith(".txt"):
+            #text = data.decode(errors="ignore")
+        #else:
+            #await message.reply("Формат не поддерживается. Поддерживаются: pdf, docx, txt.")
+            #return
+    #except Exception as e:
+        #await message.reply(f"Ошибка при чтении файла: {e}")
+        #return
+    #res = score_resume(text)
+    #resp = (
+        #f"*Оценка*: {res['score']} / 100\n"
+        #f"*Рекомендация*: {res['grade']}\n"
+        #f"*Опыт (оценка)*: {res['exp']} лет\n"
+        #f"*Email*: {', '.join(res['emails']) or 'не найден'}\n"
+       # f"*Телефон*: {', '.join(res['phones']) or 'не найден'}\n"
+        #f"*Навыки*: {', '.join(res['skills']) or 'не найдены'}\n"
+        #f"*Примечания*: {'; '.join(res['reasons'])}"
+    #)
+    #await message.reply(resp)
+
+
+
+
+@bot.message_handler(content_types=ContentType.TEXT)
+def handle_text(message: types.Message):
+    text = message.text
+    #res = score_resume(text)
+    #resp = (
+        #f"*Оценка*: {res['score']} / 100\n"
+        #f"*Рекомендация*: {res['grade']}\n"
+        #f"*Опыт (оценка)*: {res['exp']} лет\n"
+        #f"*Email*: {', '.join(res['emails']) or 'не найден'}\n"
+                #f"*Телефон*: {', '.join(res['phones']) or 'не найден'}\n"
+                #f"*Навыки*: {', '.join(res['skills']) or 'не найдены'}\n"
+                #f"*Примечания*: {'; '.join(res['reasons'])}"
+            #)
+           # await message.reply(resp)
+
 
 
 bot.polling()
