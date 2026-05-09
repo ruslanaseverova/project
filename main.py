@@ -21,8 +21,8 @@ def send_welcome(message):
     bot.reply_to(message, text)
 
 # Обработчик прикреплённых документов
-@bot.message_handler(content_types=ContentType.DOCUMENT)
-def handle_document(message: types.Message):
+@bot.message_handler(content_types=["document"])
+def handle_document(message):
     doc = message.document
     # Получаем информацию о файле и скачиваем его
     #file_info = bot.get_file(doc.file_id)
@@ -58,8 +58,8 @@ def handle_document(message: types.Message):
 
 
 
-@bot.message_handler(content_types=ContentType.TEXT)
-def handle_text(message: types.Message):
+@bot.message_handler(content_types=['text'])
+def handle_text(message):
     text = message.text
     #res = score_resume(text)
     #resp = (
