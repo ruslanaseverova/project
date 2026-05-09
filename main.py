@@ -1,7 +1,7 @@
 import telebot
 from config import TOKEN
 import os
-#from extract_text import extract_text_from_docx, extract_text_from_pdf 
+from extract_text import extract_text_from_docx, extract_text_from_pdf 
 
 
 # Замени 'TOKEN' на токен твоего бота
