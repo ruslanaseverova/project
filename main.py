@@ -25,9 +25,9 @@ def send_welcome(message):
 def handle_document(message: types.Message):
     doc = message.document
     # Получаем информацию о файле и скачиваем его
-    #file_info = await bot.get_file(doc.file_id)
-    #file_bytes = await bot.download_file(file_info.file_path)
-    #data = await file_bytes.read()
+    #file_info = bot.get_file(doc.file_id)
+    #file_bytes = bot.download_file(file_info.file_path)
+    #data = file_bytes.read()
     #fname = doc.file_name.lower()
     #try:
         # В зависимости от расширения вызываем соответствующую функцию
@@ -38,10 +38,10 @@ def handle_document(message: types.Message):
         #elif fname.endswith(".txt"):
             #text = data.decode(errors="ignore")
         #else:
-            #await message.reply("Формат не поддерживается. Поддерживаются: pdf, docx, txt.")
+            #message.reply("Формат не поддерживается. Поддерживаются: pdf, docx, txt.")
             #return
     #except Exception as e:
-        #await message.reply(f"Ошибка при чтении файла: {e}")
+        #message.reply(f"Ошибка при чтении файла: {e}")
         #return
     #res = score_resume(text)
     #resp = (
@@ -53,7 +53,7 @@ def handle_document(message: types.Message):
         #f"*Навыки*: {', '.join(res['skills']) or 'не найдены'}\n"
         #f"*Примечания*: {'; '.join(res['reasons'])}"
     #)
-    #await message.reply(resp)
+    #message.reply(resp)
 
 
 
@@ -71,7 +71,7 @@ def handle_text(message: types.Message):
                 #f"*Навыки*: {', '.join(res['skills']) or 'не найдены'}\n"
                 #f"*Примечания*: {'; '.join(res['reasons'])}"
             #)
-           # await message.reply(resp)
+           #message.reply(resp)
 
 
 
