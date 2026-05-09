@@ -2,8 +2,6 @@ import telebot
 from config import TOKEN
 import os
 from aiogram.types import ContentType
-from pathlib import types
-
 #from extract_text import extract_text_from_docx, extract_text_from_pdf 
 
 
