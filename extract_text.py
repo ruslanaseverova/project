@@ -1,5 +1,5 @@
 import os
-from pdfminer import extract_text
+from pdfminer.high_level import extract_text
 import docx
 import io
 
