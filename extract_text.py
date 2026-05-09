@@ -1,3 +1,4 @@
+#pip install pdfminer.six
 import os
 from pdfminer.high_level import extract_text
 import docx
