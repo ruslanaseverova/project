@@ -1,1 +1,2 @@
 pdfminer.six==20260107
+docx==0.8.11
