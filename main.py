@@ -53,7 +53,7 @@ def handle_document(message):
         #f"*Примечания*: {'; '.join(res['reasons'])}")
     #bot.reply_to(message, resp)
 
-@bot.message_handler(content_types=['text'])
+#Обработчик текстовых сообщений — позволяет вставлять резюме как текст@bot.message_handler(content_types=['text'])
 def handle_text(message):
     text = message.text
     #res = score_resume(text)
@@ -62,12 +62,9 @@ def handle_text(message):
         #f"*Рекомендация*: {res['grade']}\n"
         #f"*Опыт (оценка)*: {res['exp']} лет\n"
         #f"*Email*: {', '.join(res['emails']) or 'не найден'}\n"
-                #f"*Телефон*: {', '.join(res['phones']) or 'не найден'}\n"
-                #f"*Навыки*: {', '.join(res['skills']) or 'не найдены'}\n"
-                #f"*Примечания*: {'; '.join(res['reasons'])}"
-            #)
-           #message.reply(resp)
-
-
+        #f"*Телефон*: {', '.join(res['phones']) or 'не найден'}\n"
+        #f"*Навыки*: {', '.join(res['skills']) or 'не найдены'}\n"
+        #f"*Примечания*: {'; '.join(res['reasons'])}")
+     bot.reply_to(message, resp)
 
 bot.polling()
