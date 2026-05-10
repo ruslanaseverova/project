@@ -1,7 +1,7 @@
 #pip install pdfminer.six
 import os
 from pdfminer.high_level import extract_text
-import docx
+#import docx
 import io
 
 # Функция для извлечения текста из DOCX.
