@@ -1,7 +1,7 @@
 #pip install pdfminer.six
 import os
 from pdfminer.high_level import extract_text
-#import docx
+from docx import Document
 import io
 
 # Функция для извлечения текста из DOCX.
@@ -9,10 +9,10 @@ import io
 def extract_text_from_docx(path_or_bytes):
     if isinstance(path_or_bytes, (bytes, bytearray)):
         # Если пришли байты — используем BytesIO для чтения через python-docx
-        doc = docx.Document(io.BytesIO(path_or_bytes))
+        doc = Document(io.BytesIO(path_or_bytes))
     else:
         # Иначе передали путь к файлу
-        doc = docx.Document(path_or_bytes)
+        doc = Document(path_or_bytes)
     full = []
     # Собираем текст из всех параграфов
     for p in doc.paragraphs:

@@ -21,6 +21,7 @@ def find_contacts(text):
 
 # Поиск навыков по ключевым словам.
 # Сравниваем в нижнем регистре.
+# Возвращает список найденных навыков.
 def find_skills(text):
     low = text.lower()
     found = [kw for kw in SKILLS_KEYWORDS if kw in low]
@@ -48,8 +49,11 @@ def estimate_experience(text):
 # Оценка резюме по простым критериям.
 # Возвращает словарь с оценкой, категорией и найденными полями.
 def score_resume(text):
+    # ищем контакты
     emails, phones = find_contacts(text)
+    # Поиск навыков по ключевым словам
     skills = find_skills(text)
+    # Простая оценка опыта.
     exp = estimate_experience(text)
 
     score = 0

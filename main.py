@@ -1,7 +1,7 @@
 import telebot
 from config import TOKEN
 import os
-from extract_text import extract_text_from_pdf 
+from extract_text import extract_text_from_pdf, extract_text_from_docx
 from analysis import score_resume
 from io import BytesIO
 #transformers для более сложного анализа, если понадобится
@@ -25,27 +25,24 @@ def send_welcome(message):
 def handle_document(message):
     doc = message.document
     # Получаем информацию о файле и скачиваем его
-    file_info = bot.get_file(doc.file_id)
+    if not message.document:
+        return bot.send_message(message.chat.id, "Файл не получен. Пожалуйста, попробуйте снова.")
+    info = bot.get_file(message.document.file_id)
 
-
-    name = file_info.file_path.split("/")[-1]
-    save_file = bot.download_file(file_info.file_path)
+    name = info.file_path.split("/")[-1]
+    save_file = bot.download_file(info.file_path)
     with open(name, "wb") as f:
-        data = f.read()
-
-    #file_bytes = BytesIO()
-    #file_bytes = bot.download_file(file_info.file_path)
-    #file_bytes.seek(0)
-    #data = file_bytes.read()
+        f.write(save_file)
     fname = doc.file_name.lower()
     try:
         # В зависимости от расширения вызываем соответствующую функцию
+        #!f"./{name}"
         if fname.endswith(".pdf"):
-            text = extract_text_from_pdf(data)
-        #elif fname.endswith(".docx"):
-            #text = extract_text_from_docx(data)
-        elif fname.endswith(".txt"):
-            text = data.decode(errors="ignore")
+            text = extract_text_from_pdf(f"./{name}")
+        elif fname.endswith(".docx"):
+            text = extract_text_from_docx(f"./{name}")
+        #elif fname.endswith(".txt"):
+            #text = data.decode(errors="ignore")
         else:
             text ="Формат не поддерживается. Поддерживаются: pdf, docx, txt."
             bot.reply_to(message, text)
@@ -54,6 +51,7 @@ def handle_document(message):
         text = f"Ошибка при чтении файла: {e}"
         bot.reply_to(message, text)
         return
+    os.remove(f"./{name}") # удаляем файл после обработки
     res = score_resume(text)
     resp = (
         f"*Оценка*: {res['score']} / 100\n"
